@@ -17,6 +17,20 @@ class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
 
+class ClientsViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows messages to be viewed or edited.
+    """
+    queryset = Client.objects.all()
+    serializer_class = ClientsSerializer
+
+class AccountsViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows messages to be viewed or edited.
+    """
+    queryset = Account.objects.all()
+    serializer_class = AccountsSerializer
+
 class TransactionsViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows messages to be viewed or edited.

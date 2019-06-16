@@ -12,6 +12,8 @@ from .api.views import *
 
 router = routers.DefaultRouter()
 router.register('messages', MessageViewSet)
+router.register('clients', ClientsViewSet)
+router.register('accounts', AccountsViewSet)
 router.register('transactions', TransactionsViewSet)
 
 urlpatterns = [

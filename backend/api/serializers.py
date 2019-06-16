@@ -6,7 +6,17 @@ class MessageSerializer(serializers.HyperlinkedModelSerializer):
         model = Message
         fields = ('url', 'subject', 'body', 'pk')
 
-class TransactionsSerializer(serializers.HyperlinkedModelSerializer):
+class ClientsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = '__all__'
+
+class AccountsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = '__all__'
+
+class TransactionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = '__all__'
