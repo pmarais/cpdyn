@@ -1,8 +1,5 @@
 <template>
   <div class="hello">
-    <img src='@/assets/logo-django.png' style="width: 250px" />
-    <p>This is the CP ATM.</p>
-    <br/>
 
     <p>Who are you?</p>
     <input type="text" placeholder="" v-model="user">
