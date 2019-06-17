@@ -49,6 +49,12 @@
 
 0. Migrate `./manage.py migrate`
 
+0. Install R packages
+
+    ```
+    install.packages(c('httr', 'lubridate', 'dplyr'))
+    ```
+
 0. Run `import.R` R-script that will import that data into the SQLite DB, via the Django API. This requires installations of `Lubridate` & `dplyr` & `httr`
 
 0. Build frontend assets `yarn build`
