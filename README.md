@@ -2,16 +2,45 @@
 
 ## Quickstart
 
+1. Clone this Repo:
+    ```
+    git clone git@github.com:pmarais/cpdyn.git
+    ```
+
+2. Install pipenv:
+    ```
+    brew install pipenv
+    ```
+
+0. Activate virtual environment and install dev dependencies `pipenv install --dev && pipenv shell`
+
+0. Run server 
+    ```
+    ./manage.py runserver
+    ```
+    
+0. Access ATM on [http://localhost:8000/#/ATM](http://localhost:8000/#/ATM)
+
+## Get Dev Env Up & Running
+
+1. Clone this Repo:
+    ```
+    git clone git@github.com:pmarais/cpdyn.git
+    ```
+
+2. Install pipenv:
+    ```
+    brew install pipenv
+    ```
+
+0. Activate virtual environment and install dev dependencies `pipenv install --dev && pipenv shell`
+
+
 1. Update Node (https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/):
     ```
     nvm install node
     nvm use node
     ```
-2. Install pipenv:
-    ```
-    brew install pipenv
-    ```
-0. Activate virtual environment with `pipenv shell`
 
 0. Migrate `./manage.py migrate`
 
@@ -19,7 +48,10 @@
 
 0. Build frontend assets `yarn build`
 
-0. Run server `./manage.py runserver`
+0. Run server 
+    ```
+    ./manage.py runserver
+    ```
 
 0. Access ATM on [http://localhost:8000/#/ATM](http://localhost:8000/#/ATM)
 
