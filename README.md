@@ -58,7 +58,7 @@
     ./manage.py runserver
     ```
 
-0. Access ATM on [http://localhost:8000/#/ATM](http://localhost:8000/#/ATM)
+0. Access ATM on [http://localhost:8000/](http://localhost:8000/)
 
 -------------
 
