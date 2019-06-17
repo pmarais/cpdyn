@@ -20,3 +20,9 @@ class TransactionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
         fields = '__all__'
+
+class ClientsGetSerializer(serializers.ModelSerializer):
+    cl_accounts = AccountsSerializer(read_only=True)
+    class Meta:
+        model = Client
+        fields = '__all__'

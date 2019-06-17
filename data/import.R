@@ -18,18 +18,19 @@ df.tr$Date <- gsub(" UTC$", "", parse_date_time(df.tr$Date, 'd-m-y', truncated =
 for (i in 1:nrow(df.cl)) {
   # print(df.cl[i,])
   rowlist = list(
+    cl_id = df.cl$ClientID[i]
     cl_name = df.cl$Name[i],
     cl_surname = df.cl$Surname[i],
     cl_pwd = df.cl$Password[i],
-    cl_id = df.cl$IDNumber[i]
+    cl_idnumber = df.cl$IDNumber[i]
   )
   # print(rowlist)
   POST('http://localhost:8000/api/clients/', body = rowlist)
 }
 
-######################
-## Creating clients ##
-######################
+#######################
+## Creating accounts ##
+#######################
 for (i in 1:nrow(df.ac)) {
   # print(df.cl[i,])
   rowlist = list(
@@ -43,6 +44,9 @@ for (i in 1:nrow(df.ac)) {
   POST('http://localhost:8000/api/accounts/', body = rowlist)
 }
 
+###########################
+## Creating transactions ##
+###########################
 for (i in 1:nrow(df.tr)) {
   # print(df.cl[i,])
   rowlist = list(
