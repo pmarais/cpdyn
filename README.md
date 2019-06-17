@@ -1,4 +1,4 @@
-# Django Vue Template ✌️ 🐍
+# Django Vue ATM
 
 ## Quickstart
 
