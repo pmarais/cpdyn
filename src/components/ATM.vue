@@ -9,7 +9,7 @@
     
     <template v-if="user">
       <p>Pin?</p>
-      <input type="password" placeholder="" v-model="pin">
+      <input type="password" placeholder="" v-model="pin" @keyup.enter.exact="auth">
     </template>
     
     <br><br>
@@ -17,18 +17,61 @@
     <input 
       type="submit" 
       value="Submit" 
-      @click="auth" 
+      @click="auth"
       :disabled="!user || !pin">
     <hr/>
+
+    <template v-if="authed">
+      Welcome {{user}} <br><br>
+
+      These are the accounts that you have: <br><br>
+
+      <template v-for="(account, key) in accounts">
+        {{account.acc_number}} | 
+        {{account.acc_type}} | 
+        {{account.acc_opened}} -›
+        {{account.acc_balance}}
+        <input 
+          type="submit" 
+          value="Withdraw"
+          @click="withdrawInit(account)">
+        <br>
+      </template>
+    </template>
+
+    <br><br>
+
+    <template v-if="withdrawing">
+      Withdrawing from account 
+
+      {{withdrawAccount.acc_number}} | 
+      {{withdrawAccount.acc_type}} | 
+      {{withdrawAccount.acc_opened}} -›
+      {{withdrawAccount.acc_balance}}
+
+      <br><br>
+
+      Enter the amount you would like to withdraw: <br><br>
+
+      <input type="number" placeholder="0.00" v-model="withrdawAmount">
+
+      <input 
+        type="submit" 
+        value="Let's go"
+        @click="withdraw(withdrawAccount.acc_id)">
+
+    </template>
+
+    <template v-if="withdrawingSuccess">
+      <br>
+      Successfully withdrew {{withrdawAmount}} from {{withdrawAccount.acc_type}}
+    </template>
     
-    <!-- <h3>Messages on Database</h3>
-    <p v-if="messages.length === 0">No Messages</p>
-    <div class="msg" v-for="(msg, index) in messages" :key="index">
-        <p class="msg-index">[{{index}}]</p>
-        <p class="msg-subject" v-html="msg.subject"></p>
-        <p class="msg-body" v-html="msg.body"></p>
-        <input type="submit" @click="deleteMessage(msg.pk)" value="Delete" />
-    </div> -->
+    <br><br>
+
+    <button @click="reset" v-if="user">
+      Exit
+    </button>
 
   </div>
 </template>
@@ -44,13 +87,19 @@ const headers = {
 
 export default {
   name: 'ATM',
-  data() {
+  data () {
     return {
       user: '',
-      pin : '',
+      pin: '',
       authed: false,
       subject: '',
       msgBody: '',
+      client: null,
+      withdrawing: false,
+      withrdawAmount: 0,
+      withdrawAccount: null,
+      withdrawingSuccess: false,
+      accounts: [],
     };
   },
   mounted () {
@@ -63,9 +112,49 @@ export default {
     auth () {
       axios.post('/api/auth/', {user: this.user, pin: this.pin}, headers).then(response => {
         console.log(response)
+        this.client = response.data.client
+        console.log('Authorisation')
+        this.authed = true
+        this.getAccounts(this.client.cl_id)
       })
-      console.log('Authorisation')
-      this.authed = true
+    },
+    getAccounts (clId) {
+      axios.get('/api/useraccounts/' + clId + '/').then(response => {
+        this.accounts = response.data
+        console.log('accounts >>>>', this.accounts)
+      })
+    },
+    withdrawInit (account) {
+      this.withdrawing = true
+      this.withdrawAccount = account
+    },
+    withdraw (accId) {
+      console.log("Withdrawing >>", accId)
+      let payload = {
+        'tr_id': '',
+        'tr_amount': -1 * this.withrdawAmount,
+        'tr_date': new Date().toJSON().slice(0,10),
+        'tr_account': accId
+      }
+      axios.post('/api/transactions/', payload, headers).then(response => {
+        console.log(response)
+        this.withdrawing = false
+        this.getAccounts(this.client.cl_id)
+        this.withdrawingSuccess = true
+      })
+    },
+    reset () {
+      this.user = ''
+      this.pin = ''
+      this.authed = false
+      this.subject = ''
+      this.msgBody = ''
+      this.client = null
+      this.withdrawing = false
+      this.withrdawAmount = 0
+      this.withdrawAccount = null
+      this.withdrawingSuccess = false
+      this.accounts = []
     }
   }
 };

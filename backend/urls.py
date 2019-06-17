@@ -16,6 +16,8 @@ router.register('clients', ClientsViewSet)
 router.register('accounts', AccountsViewSet)
 router.register('transactions', TransactionsViewSet)
 router.register('auth', AuthViewSet)
+router.register('auth', AuthViewSet)
+router.register('useraccounts', UserAccountsViewSet)
 
 urlpatterns = [
 

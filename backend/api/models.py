@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg, Sum
 
 class Client(models.Model):
     cl_id = models.IntegerField(primary_key=True)
@@ -13,6 +14,9 @@ class Account(models.Model):
     acc_number = models.IntegerField(blank=True, null=True)
     acc_type = models.CharField(max_length=255, blank=True, null=True)
     acc_opened = models.DateField(blank=True, null=True)
+
+    def get_balance(self):
+        return self.acc_transactions.all().aggregate(balance = Sum('tr_amount'))
 
 class Transaction(models.Model):
     tr_account = models.ForeignKey(Account, related_name="acc_transactions", to_field="acc_id", on_delete=models.SET_NULL, null=True, blank=True)
