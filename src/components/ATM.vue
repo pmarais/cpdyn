@@ -53,7 +53,7 @@
 
       Enter the amount you would like to withdraw: <br><br>
 
-      <input type="number" placeholder="0.00" v-model="withrdawAmount">
+      <input type="number" v-model="withrdawAmount">
 
       <input 
         type="submit" 
