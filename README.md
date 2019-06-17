@@ -11,6 +11,17 @@
     ```
     brew install pipenv
     ```
+0. Activate virtual environment with `pipenv shell`
+
+0. Migrate `./manage.py migrate`
+
+0. Run `import.R` R-script that will import that data into the SQLite DB, via the Django API.
+
+0. Build frontend assets `yarn build`
+
+0. Run server `./manage.py runserver`
+
+0. Access ATM on [http://localhost:8000/#/ATM](http://localhost:8000/#/ATM)
 
 ![Vue Logo](/src/assets/logo-vue.png "Vue Logo")
 ![Django Logo](/src/assets/logo-django.png "Django Logo")
