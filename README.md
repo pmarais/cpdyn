@@ -12,14 +12,17 @@
     brew install pipenv
     ```
 
-0. Activate virtual environment and install dev dependencies `pipenv install --dev && pipenv shell`
+0. Activate virtual environment and install dev dependencies 
+    ```
+    pipenv install --dev && pipenv shell
+    ```
 
 0. Run server 
     ```
     ./manage.py runserver
     ```
-    
-0. Access ATM on [http://localhost:8000/#/ATM](http://localhost:8000/#/ATM)
+
+0. Access ATM on [http://localhost:8000/](http://localhost:8000/)
 
 ## Get Dev Env Up & Running
 
@@ -33,8 +36,10 @@
     brew install pipenv
     ```
 
-0. Activate virtual environment and install dev dependencies `pipenv install --dev && pipenv shell`
-
+0. Activate virtual environment and install dev dependencies 
+    ```
+    pipenv install --dev && pipenv shell
+    ```
 
 1. Update Node (https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/):
     ```
@@ -44,7 +49,7 @@
 
 0. Migrate `./manage.py migrate`
 
-0. Run `import.R` R-script that will import that data into the SQLite DB, via the Django API.
+0. Run `import.R` R-script that will import that data into the SQLite DB, via the Django API. This requires installations of `Lubridate` & `dplyr` & `httr`
 
 0. Build frontend assets `yarn build`
 
